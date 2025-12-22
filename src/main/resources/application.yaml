@@ -1,6 +1,19 @@
+# Custom application properties
+app:
+  short-code-length: 6
+  base-url: http://localhost:8080
+  rate-limit:
+    enabled: true
+    max-requests-per-minute: 10
+  analytics:
+    max-click-history: 100
+
+
 spring:
   application:
     name: url-shortener
+
+
 
 server:
   port: 8080
@@ -28,11 +41,10 @@ management:
       percentiles-histogram:
         http.server.requests: true
   tracing:
+    enabled: false
     sampling:
-      probability: 1.0  # Sample 100% of requests for demo
-  zipkin:
-    tracing:
-      endpoint: http://localhost:9411/api/v2/spans
+      probability: 1.0
+
 
 # Logging configuration
 logging:
@@ -45,12 +57,3 @@ logging:
   file:
     name: logs/url-shortener.log
 
-# Custom application properties
-app:
-  short-code-length: 6
-  base-url: http://localhost:8080
-  rate-limit:
-    enabled: true
-    max-requests-per-minute: 10
-  analytics:
-    max-click-history: 100

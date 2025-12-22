@@ -31,6 +31,12 @@
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
 
+		<!-- AspectJ dependency -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-aop</artifactId>
+		</dependency>
+
 		<!-- Spring Boot Actuator for metrics and health checks -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
