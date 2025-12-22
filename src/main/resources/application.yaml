@@ -1,0 +1,56 @@
+spring:
+  application:
+    name: url-shortener
+
+server:
+  port: 8080
+
+# Actuator endpoints for observability
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,metrics,prometheus,info,loggers
+      base-path: /actuator
+  endpoint:
+    health:
+      show-details: always
+      probes:
+        enabled: true
+  metrics:
+    export:
+      prometheus:
+        enabled: true
+    tags:
+      application: ${spring.application.name}
+      environment: dev
+    distribution:
+      percentiles-histogram:
+        http.server.requests: true
+  tracing:
+    sampling:
+      probability: 1.0  # Sample 100% of requests for demo
+  zipkin:
+    tracing:
+      endpoint: http://localhost:9411/api/v2/spans
+
+# Logging configuration
+logging:
+  level:
+    root: INFO
+    com.devops.urlshortener: DEBUG
+    org.springframework.web: INFO
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
+  file:
+    name: logs/url-shortener.log
+
+# Custom application properties
+app:
+  short-code-length: 6
+  base-url: http://localhost:8080
+  rate-limit:
+    enabled: true
+    max-requests-per-minute: 10
+  analytics:
+    max-click-history: 100
