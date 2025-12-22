@@ -37,6 +37,7 @@ public class UrlService {
     public UrlMapping shortenUrl(String originalUrl) {
         log.info("Creating short URL for: {}", originalUrl);
 
+
         String shortCode = generateShortCode();
         UrlMapping mapping = new UrlMapping(shortCode, originalUrl);
         urlStore.put(shortCode, mapping);
