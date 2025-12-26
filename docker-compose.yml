@@ -1,8 +1,7 @@
-version: '3.8'
 
 services:
-  # URL Shortener Application
   url-shortener:
+    image: zenkriiheb/url-shortener:latest
     build:
       context: .
       dockerfile: Dockerfile

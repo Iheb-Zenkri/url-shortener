@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: url-shortener-config
+  labels:
+    app: url-shortener
+data:
+  application.properties: |
+    spring.application.name=url-shortener
+    server.port=8080
+    app.short-code-length=6
+    app.base-url=http://localhost:30080
+    app.rate-limit.enabled=true
+    app.rate-limit.max-requests-per-minute=10
+
+  zipkin.endpoint: "http://zipkin:9411/api/v2/spans"
+
+  logging.level: "INFO"
