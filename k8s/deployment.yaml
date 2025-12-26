@@ -22,8 +22,8 @@ spec:
     spec:
       containers:
         - name: url-shortener
-          image: YOUR_DOCKERHUB_USERNAME/url-shortener:latest
-          imagePullPolicy: Always
+          image: zenkriiheb/url-shortener:latest
+          imagePullPolicy: Never
           ports:
             - name: http
               containerPort: 8080
