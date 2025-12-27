@@ -185,6 +185,7 @@ jobs:
           docker stop url-shortener-test || true
           docker rm url-shortener-test || true
 
+
   # Job 5: Deploy to Kurnetes (Optional - runs on main branch only)
   deploy-k8s:
     name: Deploy to Kubernetes
@@ -220,6 +221,7 @@ jobs:
         run: |
           kubectl get pods --namespace=default -l app=url-shortener
           kubectl get services --namespace=default -l app=url-shortener
+
 
   # Job 6: Notification
   notify:
