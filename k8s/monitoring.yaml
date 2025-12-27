@@ -2,7 +2,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: prometheus
-  namespace: monitoring
+  namespace: url-shortener-ns
 spec:
   type: NodePort
   ports:
@@ -16,7 +16,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: prometheus
-  namespace: monitoring
+  namespace: url-shortener-ns
 spec:
   replicas: 1
   selector:
@@ -44,7 +44,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: prometheus-config
-  namespace: monitoring
+  namespace: url-shortener-ns
 data:
   prometheus.yml: |
     global:
@@ -71,7 +71,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: zipkin
-  namespace: monitoring
+  namespace: url-shortener-ns
 spec:
   type: NodePort
   ports:
@@ -85,7 +85,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: zipkin
-  namespace: monitoring
+  namespace: url-shortener-ns
 spec:
   replicas: 1
   selector:

@@ -189,7 +189,7 @@ jobs:
           docker stop url-shortener-test || true
           docker rm url-shortener-test || true
 
-  # Job 5: Deploy to Kubernetes (Optional - runs on main branch only)
+  # Job 5: Deploy to Kurnetes (Optional - runs on main branch only)
   deploy-k8s:
     name: Deploy to Kubernetes
     runs-on: ubuntu-latest
