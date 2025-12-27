@@ -21,6 +21,11 @@ spec:
         prometheus.io/path: "/actuator/prometheus"
         prometheus.io/port: "8080"
     spec:
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1000
+        runAsGroup: 1000
+        fsGroup: 1000
       containers:
         - name: url-shortener
           image: zenkriiheb/url-shortener:latest

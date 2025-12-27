@@ -2,6 +2,15 @@
 services:
   url-shortener:
     image: zenkriiheb/url-shortener:latest
+    deploy:
+      resources:
+        limits:
+          cpus: '1.0'
+          memory: 512M
+        reservations:
+          cpus: '0.25'
+          memory: 256M
+    restart: unless-stopped
     build:
       context: .
       dockerfile: Dockerfile
