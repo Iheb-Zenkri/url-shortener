@@ -6,6 +6,9 @@ on:
   pull_request:
     branches: [ main, development ]
 
+permissions:
+  contents: write
+
 env:
   DOCKER_IMAGE: ${{ secrets.DOCKERHUB_USERNAME }}/url-shortener
   JAVA_VERSION: '17'
