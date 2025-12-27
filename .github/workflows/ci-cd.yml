@@ -61,7 +61,9 @@ jobs:
         continue-on-error: true
 
       - name: Run OWASP Dependency Check
-        uses: owasp/dependency-check-action@v3
+        uses: dependency-check/Dependency-Check_Action@main
+        env:
+          JAVA_HOME: /opt/jdk
         with:
           project: 'url-shortener'
           path: '.'
