@@ -79,6 +79,7 @@ jobs:
             target/spotbugsXml.xml
             reports/
 
+
   # Job 3: Build Docker Image
   build-docker:
     name: Build Docker Image
@@ -107,6 +108,7 @@ jobs:
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
+          logout: false
 
       - name: Extract metadata
         id: meta
