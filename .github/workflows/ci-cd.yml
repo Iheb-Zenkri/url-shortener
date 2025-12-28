@@ -176,10 +176,8 @@ jobs:
           target: 'http://localhost:8080'
           rules_file_name: ''
           cmd_options: '-a'
-          allow_issue_writing: false
-          output_directory: '.zap-writable'
-          format: 'HTML'
-          continue-on-error : true
+          fail_action: false
+
 
       - name: List ZAP reports
         run: ls -l .zap-writable
@@ -187,7 +185,7 @@ jobs:
       - name: Upload DAST results
         uses: actions/upload-artifact@v4
         with:
-          name: zap_scan
+          name: zap_scan_25240471
           path: .zap-writable/report.html
 
       - name: Stop and remove container
