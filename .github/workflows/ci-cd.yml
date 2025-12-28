@@ -13,6 +13,7 @@ permissions:
 env:
   DOCKER_IMAGE: ${{ secrets.DOCKERHUB_USERNAME }}/url-shortener
   JAVA_VERSION: '17'
+  NVD_API_KEY: ${{ secrets.NVD_API_KEY }}
 
 jobs:
   # Job 1: Build and Test
@@ -68,15 +69,14 @@ jobs:
         uses: dependency-check/Dependency-Check_Action@main
         env:
           JAVA_HOME: /opt/jdk
+          OSSINDEX_ENABLED: false
+          CENTRAL_ANALYZER_ENABLED: false
         with:
           project: 'url-shortener'
           path: '.'
           format: 'HTML'
           out: 'dependency-check-report'
-          args: >
-            --disableCentral
-            --disableOSSIndex
-            --failOnCVSS 7
+          failOnCVSS: 7
 
 
       - name: Upload SAST results
