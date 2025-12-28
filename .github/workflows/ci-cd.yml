@@ -73,6 +73,10 @@ jobs:
           path: '.'
           format: 'HTML'
           out: 'dependency-check-report'
+          args: >
+            --disableCentral
+            --disableOSSIndex
+            --failOnCVSS 7
 
 
       - name: Upload SAST results
@@ -81,7 +85,7 @@ jobs:
           name: sast-results
           path: |
             target/spotbugsXml.xml
-            reports/
+            dependency-check-report/
 
 
 
