@@ -71,6 +71,7 @@ jobs:
           JAVA_HOME: /opt/jdk
           OSSINDEX_ENABLED: false
           CENTRAL_ANALYZER_ENABLED: false
+
         with:
           project: 'url-shortener'
           path: '.'
@@ -86,6 +87,14 @@ jobs:
           path: |
             target/spotbugsXml.xml
             dependency-check-report/
+            
+      - name: Cache OWASP Dependency Check data
+        uses: actions/cache@v4
+        with:
+          path: ~/.m2/repository/org/owasp/dependency-check-data
+          key: ${{ runner.os }}-owasp-data-${{ github.run_id }}
+          restore-keys: |
+            ${{ runner.os }}-owasp-data-
 
 
 
