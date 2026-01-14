@@ -34,7 +34,7 @@ The fastest way to get started:
 
 ```bash
 # Clone the repository
-git clone https://github.com/YOUR_USERNAME/url-shortener.git
+git clone https://github.com/Iheb-Zenkri/url-shortener.git
 cd url-shortener
 
 # Run with Docker Compose (includes monitoring stack)
@@ -78,7 +78,7 @@ Choose one of these setups based on how you want to run the application:
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/YOUR_USERNAME/url-shortener.git
+   git clone https://github.com/Iheb-Zenkri/url-shortener.git
    cd url-shortener
    ```
 
@@ -196,25 +196,6 @@ docker-compose restart url-shortener
 docker stats
 ```
 
-### Dockerfile Details
-
-The project uses a multi-stage build for optimization:
-
-```dockerfile
-# Stage 1: Build (with Maven and full JDK)
-FROM maven:3.9-eclipse-temurin-17-alpine AS build
-WORKDIR /app
-COPY pom.xml .
-COPY src ./src
-RUN mvn clean package -DskipTests
-
-# Stage 2: Runtime (with JRE only, smaller image)
-FROM eclipse-temurin:17-jre-alpine
-WORKDIR /app
-COPY --from=build /app/target/*.jar app.jar
-EXPOSE 8080
-ENTRYPOINT ["java", "-jar", "app.jar"]
-```
 
 **Benefits:**
 - 60% smaller final image size

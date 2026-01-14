@@ -1,37 +1,33 @@
-apiVersion: networking.k8s.io/v1
-kind: Ingress
+apiVersion: v1
+kind: Service
 metadata:
-  name: url-shortener-ingress
+  name: url-shortener
   namespace: url-shortener-ns
   labels:
     app: url-shortener
-  annotations:
-    nginx.ingress.kubernetes.io/rewrite-target: /
-    nginx.ingress.kubernetes.io/ssl-redirect: "false"
 spec:
-  ingressClassName: nginx
-  rules:
-    - host: url-shortener.local
-      http:
-        paths:
-          - path: /
-            pathType: Prefix
-            backend:
-              service:
-                name: url-shortener
-                port:
-                  number: 80
-          - path: /api
-            pathType: Prefix
-            backend:
-              service:
-                name: url-shortener
-                port:
-                  number: 80
-          - path: /actuator
-            pathType: Prefix
-            backend:
-              service:
-                name: url-shortener
-                port:
-                  number: 80
+  type: ClusterIP
+  ports:
+    - port: 80
+      targetPort: 8080
+      protocol: TCP
+      name: http
+  selector:
+    app: url-shortener
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: url-shortener-nodeport
+  namespace: url-shortener-ns
+  labels:
+    app: url-shortener
+spec:
+  type: NodePort
+  ports:
+    - port: 8080
+      targetPort: 8080
+      protocol: TCP
+      name: http
+  selector:
+    app: url-shortener
