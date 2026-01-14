@@ -137,7 +137,7 @@ jobs:
           tags: |
             type=ref,event=branch,sanitize=true
             type=ref,event=pr
-            type=sha,prefix={{branch}}-,sanitize=true
+            type=sha,prefix=sha-
             type=raw,value=latest,enable={{is_default_branch}}
 
       - name: Build and push Docker image
