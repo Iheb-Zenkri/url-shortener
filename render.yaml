@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: url-shortener-api
+    dockerfilePath: ./Dockerfile
+    dockerContext: .
+    envVars:
+      - key: SPRING_PROFILES_ACTIVE
+        value: production
+      - key: JAVA_OPTS
+        value: -XX:+UseContainerSupport -XX:MaxRAMPercentage=75.0
+    healthCheckPath: /actuator/health
+    autoDeploy: true
+    numInstances: 1
+    runtime: docker
+    plan: free

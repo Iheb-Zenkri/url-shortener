@@ -1,3 +1,4 @@
+# Prometheus Service
 apiVersion: v1
 kind: Service
 metadata:
@@ -12,6 +13,7 @@ spec:
   selector:
     app: prometheus
 ---
+# Prometheus Deployment
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -40,6 +42,7 @@ spec:
           configMap:
             name: prometheus-config
 ---
+# Prometheus ConfigMap
 apiVersion: v1
 kind: ConfigMap
 metadata:
@@ -67,6 +70,7 @@ data:
             replacement: $1:$2
             target_label: __address__
 ---
+# Zipkin Service
 apiVersion: v1
 kind: Service
 metadata:
@@ -81,6 +85,7 @@ spec:
   selector:
     app: zipkin
 ---
+# Zipkin Deployment
 apiVersion: apps/v1
 kind: Deployment
 metadata:
