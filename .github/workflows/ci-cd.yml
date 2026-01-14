@@ -235,44 +235,6 @@ jobs:
           docker stop url-shortener-app || true
           docker rm url-shortener-app || true
 
-
-  # Job 5: Deploy to Kurnetes (Optional - runs on main branch only)
-  deploy-k8s:
-    name: Deploy to Kubernetes
-    runs-on: ubuntu-latest
-    needs: [build-docker, security-dast]
-    if: github.event_name == 'push' || github.event_name == 'pull_request'
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Set up kubectl
-        uses: azure/setup-kubectl@v3
-        with:
-          version: 'v1.28.0'
-
-      - name: Configure kubeconfig
-        run: |
-          mkdir -p $HOME/.kube
-          echo "${{ secrets.KUBECONFIG }}" | base64 -d > $HOME/.kube/config
-
-      - name: Update deployment image
-        run: |
-          kubectl set image deployment/url-shortener \
-            url-shortener=${{ env.DOCKER_IMAGE }}:${{ github.sha }} \
-            --namespace=default
-
-      - name: Wait for rollout to complete
-        run: |
-          kubectl rollout status deployment/url-shortener --namespace=default --timeout=5m
-
-      - name: Verify deployment
-        run: |
-          kubectl get pods --namespace=default -l app=url-shortener
-          kubectl get services --namespace=default -l app=url-shortener
-
-
   # Job 6: Notification
   notify:
     name: Send Notifications
