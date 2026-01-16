@@ -56,10 +56,18 @@
 		</dependency>
 
 		<!-- Zipkin for distributed tracing -->
+
 		<dependency>
 			<groupId>io.zipkin.reporter2</groupId>
 			<artifactId>zipkin-reporter-brave</artifactId>
 		</dependency>
+
+		<dependency>
+			<groupId>io.zipkin.reporter2</groupId>
+			<artifactId>zipkin-sender-urlconnection</artifactId>
+		</dependency>
+
+
 
 		<!-- Lombok to reduce boilerplate -->
 		<dependency>

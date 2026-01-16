@@ -14,7 +14,6 @@ spring:
     name: url-shortener
 
 
-
 server:
   port: 8080
 
@@ -41,9 +40,19 @@ management:
       percentiles-histogram:
         http.server.requests: true
   tracing:
-    enabled: false
+    enabled: true
     sampling:
-      probability: 1.0
+      probability: 1
+    propagation:
+      type: B3
+  zipkin:
+    tracing:
+      endpoint: http://zipkin:9411/api/v2/spans
+      enabled: true
+      service-name: ${spring.application.name}
+      encoding: JSON
+      connect-timeout: 1s
+      read-timeout: 10s
 
 
 # Logging configuration
@@ -52,6 +61,8 @@ logging:
     root: INFO
     com.devops.urlshortener: DEBUG
     org.springframework.web: INFO
+    brave: DEBUG
+    io.micrometer.tracing: DEBUG
   pattern:
     console: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
   file:
